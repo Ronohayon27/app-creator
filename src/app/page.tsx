@@ -1,9 +1,15 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { useTRPC } from "@/trpc/client";
-import { useQuery } from "@tanstack/react-query";
-
+import { useMutation } from "@tanstack/react-query";
 export default function Home() {
   const trpc = useTRPC();
-  const { data } = useQuery(trpc.hello.queryOptions({ text: "Hello World" }));
-  return <div>{JSON.stringify(data)}</div>;
+  const invoke = useMutation(trpc.invoke.mutationOptions({}));
+  return (
+    <div className="p-4 max-w-7xl mx-auto">
+      <Button onClick={() => invoke.mutate({ text: "Ron" })}>
+        Invoke Background Function
+      </Button>
+    </div>
+  );
 }
