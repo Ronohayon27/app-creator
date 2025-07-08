@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Fragment } from "@/generated/prisma";
+import FragmentWeb from "../components/fragment-web";
 import {
   ResizableHandle,
   ResizablePanel,
@@ -19,7 +20,7 @@ interface Props {
 const ProjectView = ({ projectId }: Props) => {
   const [activeFragment, setActiveFragment] = useState<Fragment | null>(null);
   const trpc = useTRPC();
-  const { data: project } = useSuspenseQuery(
+  const {} = useSuspenseQuery(
     trpc.projects.getOne.queryOptions({ id: projectId })
   );
 
@@ -45,7 +46,7 @@ const ProjectView = ({ projectId }: Props) => {
         <ResizableHandle withHandle />
 
         <ResizablePanel defaultSize={65} minSize={50}>
-          {JSON.stringify(project, null, 2)}
+          {!!activeFragment && <FragmentWeb data={activeFragment} />}
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>
