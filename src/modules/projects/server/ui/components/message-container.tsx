@@ -24,15 +24,14 @@ const MessageContainer = ({
   const { data: messages } = useSuspenseQuery(
     trpc.messages.getMany.queryOptions({ projectId })
   );
-  useEffect(() => {
-    const lastAssistantMessageWithFragment = messages?.findLast(
-      (message) => message.role === "ASSISTANT" && !!message.fragment
-    );
-    if (lastAssistantMessageWithFragment) {
-      //TODO
-      setActiveFragment(lastAssistantMessageWithFragment.fragment);
-    }
-  }, [messages, setActiveFragment]);
+  // useEffect(() => {
+  //   const lastAssistantMessageWithFragment = messages?.findLast(
+  //     (message) => message.role === "ASSISTANT" && !!message.fragment
+  //   );
+  //   if (lastAssistantMessageWithFragment) {
+  //     setActiveFragment(lastAssistantMessageWithFragment.fragment);
+  //   }
+  // }, [messages, setActiveFragment]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
