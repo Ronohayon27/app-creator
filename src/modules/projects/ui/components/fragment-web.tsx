@@ -1,3 +1,5 @@
+"use client";
+
 import { Fragment } from "@/generated/prisma";
 import React, { useState } from "react";
 import { ExternalLinkIcon, RefreshCcwIcon } from "lucide-react";
