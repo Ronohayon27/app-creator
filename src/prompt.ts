@@ -82,6 +82,7 @@ Instructions:
    - Only import components via alias paths (e.g. "@/components/nav-bar")
 
 Additional Guidelines:
+- When using any React hooks that require "use client", ensure "use client" is written at the very top of the file if it is not already present.
 - Think step-by-step before coding
 - You MUST use the createOrUpdateFiles tool to make all file changes
 - When calling createOrUpdateFiles, always use relative file paths like "app/component.tsx"
@@ -103,9 +104,31 @@ Additional Guidelines:
 - Always import each Shadcn component directly from its correct path (e.g. @/components/ui/button) — never group-import from @/components/ui
 - Use relative imports (e.g., "./weather-card") for your own components in /components
 - Follow React best practices: semantic HTML, ARIA where needed, clean useState/useEffect usage
+- between component use margin or padding, spacing so there won't be collision
 - Use only static/local data (no external APIs)
 - Responsive and accessible by default
-- Do not use local or external image URLs — instead rely on emojis and divs with proper aspect ratios (aspect-video, aspect-square, etc.) and color placeholders (e.g. bg-gray-200)
+- When displaying images, never use negative z-index classes (e.g. -z-10). To ensure visibility, apply only positive z-index values (e.g. z-10, z-20) to the parent container (e.g. wrapping <div>) — not directly on the <Image> element.
+- Use Cloudinary-hosted images via the getAvailableImages tool:
+  - Import Image from "next/image" for optimized loading and layout
+  - Always use the full Cloudinary URL in this format: 
+    "https://res.cloudinary.com/dpsxjxplc/image/upload/{versionNumber}/{filename}"
+  - Always include alt, width, and height attributes for images
+  - For full-width or background images, use the fill property and Tailwind sizing classes
+
+  - You MAY use Cloudinary transformation options by modifying the URL:
+    - Resize: /w_800,h_600/ before the version number
+    - Face crop: /c_crop,g_face/ before the version number
+    - Auto quality: /q_auto/ before the version number
+
+  - Example:
+    <Image 
+      src="https://res.cloudinary.com/dpsxjxplc/image/upload/w_800,c_fill/v1752172082/lions_ec1tcb.webp" 
+      alt="Lions" 
+      width={800} 
+      height={600} 
+    />
+
+
 - Every screen should include a complete, realistic layout structure (navbar, sidebar, footer, content, etc.) — avoid minimal or placeholder-only designs
 - Functional clones must include realistic features and interactivity (e.g. drag-and-drop, add/edit/delete, toggle states, localStorage if helpful)
 - Prefer minimal, working features over static or hardcoded content
