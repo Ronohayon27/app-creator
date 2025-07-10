@@ -15,7 +15,7 @@ export default function Home() {
           ></Image>
         </div>
         <h1 className="text-2xl md:text-5xl font-bold text-center">
-          Build something with AppCreator
+          Build something with The AppCreator
         </h1>
         <p className="text-lg md:text-xl text-center text-muted-foreground">
           Create your first app in minutes with an AI
