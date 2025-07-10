@@ -85,7 +85,7 @@ const MessageForm = ({ projectId }: Props) => {
               maxRows={8}
               placeholder="What would you like to build?"
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
+                if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();
                   form.handleSubmit(onSubmit)(e);
                 }

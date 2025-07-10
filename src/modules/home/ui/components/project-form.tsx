@@ -87,7 +87,7 @@ const ProjectForm = () => {
                 onBlur={() => setIsFocused(false)}
                 placeholder="What would you like to build?"
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" || !e.shiftKey) {
+                  if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
                     form.handleSubmit(onSubmit)(e);
                   }

@@ -8,26 +8,25 @@ import { Button } from "@/components/ui/button";
 import UserControl from "@/components/user-control";
 import { SunMoon } from "lucide-react";
 
-
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   return (
     <nav className="p-4 bg-transparent fixed top-0 left-0 right-0 z-50 transition-all duration-200 border-b border-transparent">
       <div className="max-w-5xl mx-auto w-full flex justify-between items-center">
         <Link href={"/"} className="flex items-center gap-2">
-          <Image src={"/logo.svg"} width={24} height={24} alt="Appcreator" />
+          <Image src={"/Logo.svg"} width={24} height={24} alt="Appcreator" />
           <span className="font-semibold text-lg">Appcreator</span>
         </Link>
         <div className="flex items-center gap-2">
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={toggleTheme} 
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
             className="rounded-full"
             aria-label="Toggle theme"
           >
