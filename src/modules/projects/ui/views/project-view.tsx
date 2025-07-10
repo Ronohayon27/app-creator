@@ -18,6 +18,7 @@ import { CodeIcon, CrownIcon, EyeIcon } from "lucide-react";
 import Link from "next/link";
 import FileExplorer from "@/components/file-explorer";
 import UserControl from "@/components/user-control";
+import { ErrorBoundary } from "react-error-boundary";
 interface Props {
   projectId: string;
 }
@@ -34,16 +35,22 @@ const ProjectView = ({ projectId }: Props) => {
           minSize={20}
           className="flex flex-col min-h-0 overflow-y-scroll"
         >
-          <Suspense fallback={<div>Loading Project...</div>}>
-            <ProjectHeader projectId={projectId} />
-          </Suspense>
-          <Suspense fallback={<div>Loading messages...</div>}>
-            <MessageContainer
-              projectId={projectId}
-              activeFragment={activeFragment}
-              setActiveFragment={setActiveFragment}
-            />
-          </Suspense>
+          <ErrorBoundary
+            fallback={<p>Error loading project header, try refresh</p>}
+          >
+            <Suspense fallback={<div>Loading Project...</div>}>
+              <ProjectHeader projectId={projectId} />
+            </Suspense>
+          </ErrorBoundary>
+          <ErrorBoundary fallback={<p>Error loading messages, try refresh</p>}>
+            <Suspense fallback={<div>Loading messages...</div>}>
+              <MessageContainer
+                projectId={projectId}
+                activeFragment={activeFragment}
+                setActiveFragment={setActiveFragment}
+              />
+            </Suspense>
+          </ErrorBoundary>
         </ResizablePanel>
         <ResizableHandle withHandle />
 
@@ -68,7 +75,7 @@ const ProjectView = ({ projectId }: Props) => {
               </TabsList>
               <div className="ml-auto flex items-center gap-x-2">
                 <Button asChild size="sm" variant={"tertiary"}>
-                  <Link href={"/pricing"}>
+                  <Link href={"/billing"}>
                     <CrownIcon className="size-4" />
                     <span>Upgrade</span>
                   </Link>

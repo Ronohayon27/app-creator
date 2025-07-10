@@ -61,10 +61,8 @@ const MessageForm = ({ projectId }: Props) => {
   const isPending = createMessage.isPending;
   const isButtonDisabled = isPending || !form.formState.isValid;
 
-
-
   return (
-    <Form {...form}  >
+    <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn(
@@ -79,13 +77,19 @@ const MessageForm = ({ projectId }: Props) => {
           render={({ field }) => (
             <TextAreaAutosize
               {...field}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
               disabled={isPending}
               className="w-full resize-none border-none bg-transparent text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-0 focus-visible:ring-transparent"
               minRows={2}
               maxRows={8}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
               placeholder="What would you like to build?"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  form.handleSubmit(onSubmit)(e);
+                }
+              }}
             />
           )}
         />
