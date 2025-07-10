@@ -36,6 +36,7 @@ const MessageForm = ({ projectId }: Props) => {
       value: "",
     },
   });
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     await createMessage.mutateAsync({
       value: values.value,
@@ -56,10 +57,14 @@ const MessageForm = ({ projectId }: Props) => {
       },
     })
   );
+
   const isPending = createMessage.isPending;
   const isButtonDisabled = isPending || !form.formState.isValid;
+
+
+
   return (
-    <Form {...form}>
+    <Form {...form}  >
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn(
@@ -81,12 +86,6 @@ const MessageForm = ({ projectId }: Props) => {
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
               placeholder="What would you like to build?"
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
-                  e.preventDefault();
-                  form.handleSubmit(onSubmit)(e);
-                }
-              }}
             />
           )}
         />
