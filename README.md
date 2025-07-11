@@ -1,41 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# App Creator
 
-## Getting Started
+A Next.js application that creates web apps using OpenAI API, similar to Loveable. This project allows you to generate web applications by describing what you want to build.
 
-First, run the development server:
+## Features
+
+- AI-powered web app generation using OpenAI
+- User authentication with Clerk
+- Background processing with Inngest
+- Image management with Cloudinary
+- Modern UI with Tailwind CSS and Shadcn UI components
+
+## Prerequisites
+
+- Node.js 18.x or higher
+- npm or yarn
+- OpenAI API key
+- Clerk account and API keys
+- Inngest account
+
+## Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```
+# OpenAI
+OPENAI_API_KEY=your_openai_api_key
+
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
+# Inngest
+INNGEST_EVENT_KEY=your_inngest_event_key
+INNGEST_SIGNING_KEY=your_inngest_signing_key
+
+# Database (Prisma)
+DATABASE_URL=your_database_connection_string
+```
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/app-creator.git
+cd app-creator
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Set up the database:
+
+```bash
+npx prisma generate
+npx prisma db push
+```
+
+4. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/src/app`: Next.js app router pages
+- `/src/components`: Reusable UI components
+- `/src/inngest`: Inngest functions and client setup
+- `/src/lib`: Utility functions and shared code
+- `/src/modules`: Feature-specific code organized by domain
+- `/public`: Static assets
 
-## Learn More
+## Image Management
 
-To learn more about Next.js, take a look at the following resources:
+This project uses Cloudinary for image hosting. Images are organized into categories:
+- Food
+- Hero backgrounds
+- Movies
+- Nature
+- Products
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The Cloudinary base URL is: `https://res.cloudinary.com/dpsxjxplc/image/upload/`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Authentication
 
-## Deploy on Vercel
+This project uses [Clerk](https://clerk.dev/) for authentication. Clerk provides:
+- User sign-up and sign-in
+- Social login options
+- User profile management
+- Session management
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Inngest Background Processing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[Inngest](https://www.inngest.com/) is used for background processing and handling AI generation tasks. The main function is defined in `/src/inngest/functions.ts`.
 
-## How to use
+## Development
 
-run npx inngest-cli@1.8.0 dev
-run npm run dev
+- Use `npm run dev` to start the development server with Turbopack
+- Use `npm run build` to create a production build
+- Use `npm run start` to run the production build
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
