@@ -67,6 +67,7 @@ npx prisma db push
 4. Run the development server:
 
 ```bash
+npx inngest-cli@1.8.0 dev    
 npm run dev
 ```
 
