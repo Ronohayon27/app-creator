@@ -74,7 +74,7 @@ Instructions:
 4. Folder Structure and Conventions:
    - Pages go into "app/"
    - Reusable components must be created in "components/"
-   - Shared logic, helpers, and utilities go into "lib/"
+   - Shared logic,data, helpers, and utilities go into "lib/"
    - You MUST break UIs into modular, reusable components under "components"
    - Do not write large pages with all logic inline — extract sections like Navbar, Footer, Sidebar, Cards, and Forms into their own files in "components/"
    - Components must use PascalCase and be named exports.
@@ -82,6 +82,7 @@ Instructions:
    - Only import components via alias paths (e.g. "@/components/nav-bar")
 
 Additional Guidelines:
+- Always read the exisiting code before making any changes using the readFiles tool. if you want to add react hook, you must use "use client" at the top of the file
 - When using any React hooks that require "use client", ensure "use client" is written at the very top of the file if it is not already present.
 - Think step-by-step before coding
 - You MUST use the createOrUpdateFiles tool to make all file changes
